@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium File Purchase</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .file-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #ee5a24;
+        }
+        
+        .file-info h3 {
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+        
+        .file-info p {
+            color: #636e72;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .price {
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .price-amount {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ee5a24;
+        }
+        
+        .price-currency {
+            font-size: 20px;
+            color: #636e72;
+        }
+        
+        .buy-btn {
+            background: linear-gradient(135deg, #ee5a24 0%, #ff9f43 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(238, 90, 36, 0.3);
+        }
+        
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(238, 90, 36, 0.4);
+        }
+        
+        .buy-btn:active {
+            transform: translateY(0);
+        }
+        
+        .instructions {
+            margin-top: 25px;
+            padding: 20px;
+            background: #fff9e6;
+            border-radius: 10px;
+            border-left: 4px solid #fdcb6e;
+        }
+        
+        .instructions h4 {
+            color: #e17055;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+            color: #636e72;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .admin-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f4fd;
+            border-radius: 10px;
+            border: 1px dashed #74b9ff;
+        }
+        
+        .admin-section h4 {
+            color: #0984e3;
+            margin-bottom: 10px;
+        }
+        
+        .admin-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .admin-btn {
+            background: #0984e3;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #636e72;
+            font-size: 12px;
+            border-top: 1px solid #dfe6e9;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .price-amount {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Premium File Access</h1>
+            <p>Instant Delivery • Secure Payment • 24/7 Support</p>
+        </div>
+        
+        <div class="content">
+            <div class="file-info">
+                <h3>📦 Premium Resource Bundle</h3>
+                <p>• Complete project files<br>• Documentation<br>• Source code<br>• Lifetime updates<br>• Premium support</p>
+            </div>
+            
+            <div class="price">
+                <span class="price-amount">₹99</span>
+                <span class="price-currency">INR</span>
+            </div>
+            
+            <button class="buy-btn" onclick="initiatePayment()">
+                🔒 BUY NOW - ₹99
+            </button>
+            
+            <div class="instructions">
+                <h4>📋 Purchase Instructions:</h4>
+                <ol>
+                    <li>Click "BUY NOW" button</li>
+                    <li>Complete payment securely</li>
+                    <li>Screenshot payment confirmation</li>
+                    <li>Send screenshot to @YourBotUsername</li>
+                    <li>Receive your file within 5 minutes</li>
+                </ol>
+            </div>
+            
+            <!-- Admin Controls -->
+            <div class="admin-section" id="adminSection" style="display: none;">
+                <h4>🔧 Admin Controls</h4>
+                <div class="admin-controls">
+                    <button class="admin-btn" onclick="updatePrice()">Update Price</button>
+                    <button class="admin-btn" onclick="viewSales()">View Sales</button>
+                    <button class="admin-btn" onclick="manageFiles()">Manage Files</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2024 Your Company • Secure Payment • Instant Delivery</p>
+        </div>
+    </div>
+
+    <script>
+        // Admin access check (you can set password or specific conditions)
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.get('admin') === 'true') {
+            document.getElementById('adminSection').style.display = 'block';
+        }
+        
+        // Payment initialization
+        function initiatePayment() {
+            // Razorpay Integration
+            const options = {
+                "key": "rzp_test_YOUR_KEY_ID", // Replace with your Razorpay Key ID
+                "amount": 9900, // ₹99 * 100
+                "currency": "INR",
+                "name": "Your Company",
+                "description": "Premium File Purchase",
+                "image": "https://your-logo-url.com/logo.png",
+                "handler": function(response){
+                    // Payment success
+                    alert('Payment Successful! Payment ID: ' + response.razorpay_payment_id);
+                    showSuccessMessage(response.razorpay_payment_id);
+                },
+                "prefill": {
+                    "name": "Customer Name",
+                    "email": "customer@example.com",
+                    "contact": "9999999999"
+                },
+                "theme": {
+                    "color": "#ee5a24"
+                }
+            };
+            
+            const rzp = new Razorpay(options);
+            rzp.open();
+            
+            rzp.on('payment.failed', function(response){
+                alert('Payment Failed. Please try again.');
+                console.error(response.error);
+            });
+        }
+        
+        function showSuccessMessage(paymentId) {
+            const successHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <h3 style="color: #27ae60;">✅ Payment Successful!</h3>
+                    <p>Payment ID: ${paymentId}</p>
+                    <p>Please take screenshot and send to our Telegram bot</p>
+                    <button onclick="openTelegram()" style="background: #0088cc; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin: 10px; cursor: pointer;">
+                        📱 Open Telegram
+                    </button>
+                </div>
+            `;
+            
+            document.querySelector('.content').innerHTML += successHTML;
+        }
+        
+        function openTelegram() {
+            window.open('https://t.me/YourBotUsername', '_blank');
+        }
+        
+        // Admin functions
+        function updatePrice() {
+            const newPrice = prompt('Enter new price (₹):', '99');
+            if(newPrice) {
+                document.querySelector('.price-amount').textContent = `₹${newPrice}`;
+                document.querySelector('.buy-btn').textContent = `🔒 BUY NOW - ₹${newPrice}`;
+            }
+        }
+        
+        function viewSales() {
+            alert('Sales dashboard will open here');
+            // Implement sales tracking
+        }
+        
+        function manageFiles() {
+            alert('File management panel');
+            // Implement file management
+        }
+    </script>
+</body>
+</html>
